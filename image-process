@@ -1,0 +1,31 @@
+#encoding=utf-8
+#有一个目录,装了很多照片,把它们的尺寸都变成都不大于iphone5分辨率(1136x640)的大小:
+#!/usr/bin/env python
+
+from PIL import Image
+import glob
+
+#得到当前目录下的图片文件列表
+def get_list(pics):
+	return glob.glob(pics)
+#图像处理
+def image_process(imagename,number):
+	im=Image.open(imagename)
+	w,h=im.size
+	smaller_w = 1136 if w > 1136 else w
+ 	smaller_h = 640 if h > 640 else h
+	im2=im.resize((smaller_w,smaller_h))	
+	im2.save('%d.jpg' %number)
+
+#主函数,循环遍历图像列表进行处理
+def main():
+	imagelist=get_list('/home/jeremy/图片/*.jpg')
+	print imagelist
+	n=1
+	for name in imagelist:
+		print name
+		image_process(name,n)
+		n+=1
+
+if __name__ =='__main__':
+	main()
