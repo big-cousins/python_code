@@ -1,0 +1,17 @@
+#任一个英文的纯文本文件,统计其中的单词个数
+#!/usr/bin/env python
+
+import re
+
+def count_words(filepath):
+	f=open(filepath,'rb')
+	s=f.read()
+	print s
+	words=re.findall(r'[A-Za-z]+',s)
+	print words
+	return len(words)
+
+if __name__=='__main__':
+	file_path=raw_input("> ")
+	num=count_words(file_path)
+	print num
